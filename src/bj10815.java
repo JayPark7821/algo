@@ -19,6 +19,14 @@ import java.util.stream.Stream;
  * 4. 넷째 줄에는 상근이가 가지고 있는 숫자 카드인지 아닌지를 구해야 할 M개의 정수가 주어진다 (공백으로 구분 ,-10,000,000 <= 카드숫자 <= 10,000,000  )
  *
  * key binarySearch
+ *
+ * input
+ * 5
+ * 6 3 2 10 -10
+ * 8
+ * 10 9 -5 2 3 4 5 -10
+ * output
+ * 1 0 0 1 1 0 0 1
  */
 
 public class bj10815 {
@@ -33,14 +41,38 @@ public class bj10815 {
         // 상근이가 가지고 있는 카드들 정렬 int
         Integer[] cards = Stream.of(cardsInString).mapToInt(Integer::parseInt).sorted().boxed().toArray(Integer[]::new);
 
-//        for (Integer card : cards) {
-//            System.out.println("card = " + card);
-//        }
+        // 상근이 카드와 비교해볼 카드 숫자
+        int m = Integer.parseInt(reader.readLine());
+        // 상근이가 가지고 있는 카드와 비교할 대상 카드들 String
+        String[] compareCardsInString = (reader.readLine()).split(" ");
+        // 비교할 대상 카드들 int
+        Integer[] compareCards = Stream.of(compareCardsInString).mapToInt(Integer::parseInt).boxed().toArray(Integer[]::new);
 
+        if( n == cards.length && m == compareCards.length) {
+            for (Integer compareCard : compareCards) {
+                int startIndex = 0;
+                int endIndex = cards.length - 1;
 
-
+                while(startIndex <= endIndex) {
+                    int middleIndex = (startIndex + endIndex) / 2;
+                    if (cards[middleIndex].equals(compareCard) ) {
+                        System.out.print("1 ");
+                        break;
+                    }else if(compareCard < cards[middleIndex] ){
+                        endIndex = middleIndex - 1;
+                    }else if(cards[middleIndex] < compareCard){
+                        startIndex = middleIndex + 1;
+                    }else{
+                        System.out.print("0 ");
+                        break;
+                    }
+                    if(startIndex > endIndex){
+                        System.out.print("0 ");
+                        break;
+                    }
+                }
+            }
+        }
     }
-
 }
-
 
