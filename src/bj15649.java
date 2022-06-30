@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 /**
  * 백준 15649
  *
@@ -34,11 +39,50 @@
  *    - 5번 노드의 자식 노드는 4, 7 인데 오름차순 탐색이니 4번노드 탐색 ( 1 -> 2 -> 6 -> 8 -> 3 -> 5 -> 4 )
  *    - 4번 노드의 자식 노드 7번 탐색 ( 1 -> 2 -> 6 -> 8 -> 3 -> 5 -> 4 -> 7 )
  *    - 탐색 완료
+ *
+ *    예제 입력에서
+ *    3 1 입력 -> 1 2 3
+ *    4 2 입력 -> 1 2
+ *             , 1 3
+ *             , 1 4
+ *             , 2 1
+ *             , 2 3
+ *                .
+ *                .
+ *                .
+ *                .
+ *
+ *
  */
 
 public class bj15649 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        /**
+         * StringTokenizer 클래스
+         *  - tring클래스에서 제공하는 split()메소드와 같은 기능을 하는 클래스로,
+         *  - 생성 시 전달받은 문자열을 구분자로 나누어 각 토큰에 저장한다.
+         *
+         *  Params:
+         *   str – a string to be parsed.
+         *   delim – the delimiters.
+         *   returnDelims – flag indicating whether to return the delimiters as tokens.
+         *  Throws:
+         *      NullPointerException – if str is null
+         * public StringTokenizer(String str, String delim, boolean returnDelims) {
+         * }
+         */
+
+        String input = reader.readLine();
+        StringTokenizer st = new StringTokenizer(input);
+
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+
 
     }
+
+    public static
 }
