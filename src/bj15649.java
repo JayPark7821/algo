@@ -1,6 +1,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -77,12 +79,45 @@ public class bj15649 {
 
         String input = reader.readLine();
         StringTokenizer st = new StringTokenizer(input);
-
+        // 1부터 N까지 자연수
         int N = Integer.parseInt(st.nextToken());
+        //길이가 M인 수열
         int M = Integer.parseInt(st.nextToken());
 
 
+        int[] arr = new int[M];
+        // DFS에서 이미 방문한 노드인지 저장
+        boolean[] visited = new boolean[N];
+
+        dfs(N, M);
+
     }
 
-    public static
+    /**
+     *
+     *  3 , 2
+     *
+     *    1-----2------3
+     *    |____________|
+     *
+     *  3 ,3
+     *
+     *    1--2
+     *    |  /
+     *    | /
+     *     3
+     *
+     *  4 , 4
+     *
+     *      --3--
+     *     /  |  \
+     *    1 --|-- 2
+     *     \  |   /
+     *      --4--
+     *
+     *
+     */
+    public static void dfs(int N, int M ){
+
+    }
 }
