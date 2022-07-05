@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 /**
@@ -87,7 +85,7 @@ public class bj15649 {
     public static int[] arr;
     // DFS에서 이미 방문한 노드인지 저장
     public static boolean[] visited;
-    public static String toPrint ="";
+    public static StringBuilder toPrint = new StringBuilder();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -121,16 +119,16 @@ public class bj15649 {
 
         dfs(N, M, 0);
 
-        System.out.println("toPrint = " + toPrint);
+        System.out.println( toPrint);
     }
 
 
     public static void dfs(int N, int M, int depth ) {
         if (depth == M) {
             for (int i : arr) {
-                toPrint = toPrint + i + " ";
+                toPrint.append(i).append(' ');
             }
-            toPrint = toPrint + "\n";
+            toPrint.append('\n');
             return;
         }
         // 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
