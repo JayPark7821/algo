@@ -42,6 +42,30 @@ import java.util.StringTokenizer;
  *    - 4번 노드의 자식 노드 7번 탐색 ( 1 -> 2 -> 6 -> 8 -> 3 -> 5 -> 4 -> 7 )
  *    - 탐색 완료
  *
+ *
+ *
+ *  - 3 , 2
+ *
+ *     1-----2------3
+ *     |____________|
+ *
+ *  - 3 ,3
+ *
+ *     1--2
+ *     |  /
+ *     | /
+ *      3
+ *
+ *  - 4 , 4
+ *
+ *       --3--
+ *      /  |  \
+ *     1 --|-- 2
+ *      \  |   /
+ *       --4--
+ *
+ *
+ *
  *    예제 입력에서
  *    3 1 입력 -> 1 2 3
  *    4 2 입력 -> 1 2
@@ -58,6 +82,12 @@ import java.util.StringTokenizer;
  */
 
 public class bj15649 {
+
+    // 길이가 M인 수열
+    public static int[] arr;
+    // DFS에서 이미 방문한 노드인지 저장
+    public static boolean[] visited;
+    public static String toPrint ="";
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -79,45 +109,45 @@ public class bj15649 {
 
         String input = reader.readLine();
         StringTokenizer st = new StringTokenizer(input);
+
         // 1부터 N까지 자연수
         int N = Integer.parseInt(st.nextToken());
+        visited = new boolean[N];
+
         //길이가 M인 수열
         int M = Integer.parseInt(st.nextToken());
+        arr = new int[M];
 
 
-        int[] arr = new int[M];
-        // DFS에서 이미 방문한 노드인지 저장
-        boolean[] visited = new boolean[N];
+        dfs(N, M, 0);
 
-        dfs(N, M);
-
+        System.out.println("toPrint = " + toPrint);
     }
 
-    /**
-     *
-     *  3 , 2
-     *
-     *    1-----2------3
-     *    |____________|
-     *
-     *  3 ,3
-     *
-     *    1--2
-     *    |  /
-     *    | /
-     *     3
-     *
-     *  4 , 4
-     *
-     *      --3--
-     *     /  |  \
-     *    1 --|-- 2
-     *     \  |   /
-     *      --4--
-     *
-     *
-     */
-    public static void dfs(int N, int M ){
+
+    public static void dfs(int N, int M, int depth ) {
+        if (depth == M) {
+            for (int i : arr) {
+                toPrint = toPrint + i + " ";
+            }
+            toPrint = toPrint + "\n";
+            return;
+        }
+        // 1부터 N까지 자연수 중에서 중복 없이 M개를 고른 수열
+        // 1~N 까지 자연수
+        for(int i = 0 ; i < N ; i++){
+            // 해당 노드를 방문했는지 check
+            if(!visited[i]){
+                // 방문하지 않았으면 방문하고 visited에 ture
+                visited[i] = true;
+                // 방문하지 않은 노드를 방문하러 드러왔으니 depth추가 + 1
+                arr[depth] = i + 1;
+                // 다음 노드를 찾으러 다시 dfs재귀 호출
+                dfs(N,M,depth+1 );
+                // M개의 수열 즉 주어진 depth만큼 들어갔다면 나머지 숫자는 방문 필요 X
+                visited[i] = false;
+            }
+        }
 
     }
 }
